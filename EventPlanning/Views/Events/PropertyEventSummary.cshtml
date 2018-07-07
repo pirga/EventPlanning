@@ -1,0 +1,22 @@
+﻿@model EventPlanning.Models.MyEventProperty
+
+<div class="form-group" id="uuidv4()">
+    <div class="form-row">
+        @*@Html.Hidden("Id",0)
+        @Html.Hidden("IdEvent",Model.Id)*@
+        <div class="col-md-5">
+            <label>Наименование поля</label>
+            @Html.TextBoxFor(x=>x.Key)
+        </div>
+        <div class="col-md-5">
+            <label>Значение поля</label>
+            @Html.TextBoxFor(x=>x.Value)
+        </div>
+    </div>
+    <div><input type="button" value="Remove" onclick="RemoveProperty(uuidv4())"/></div>
+</div>
+
+@*<script>
+    
+    var id = uuidv4();
+</script>*@

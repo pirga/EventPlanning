@@ -1,0 +1,66 @@
+﻿@model List<EventPlanning.Models.MyEventProperty>
+    @{ 
+        var a = Guid.NewGuid().ToString();
+    }
+<div id="formElements">
+    @*@Html.Partial("PropertyEventSummary", new EventPlanning.Models.MyEventProperty())*@
+    @foreach (var item in Model)
+    {
+        @*@Html.Partial("PropertyEventSummary", item);*@
+        { a = Guid.NewGuid().ToString(); }
+        <div class="form-group" id="@a">
+            <div class="form-row">
+                <div class="col-md-5">
+                    <label>Наименование поля</label>
+                    @*@Html.TextBox(item.Key == null ? item.Key : "1")*@
+                    <input type="text" id="Key" name="Key" value="@item.Key" />
+                </div>
+                <div class="col-md-5">
+                    <label>Значение поля</label>
+                    @*@Html.TextBox(item.Value == null ? item.Value : "1")*@
+                    <input type="text" id="Value" name="Value" value="@item.Value" />
+                </div>
+            </div>
+            <div><input type="button" value="Remove" onclick="RemoveProperty('@a')" /></div>
+        </div>
+    }
+</div>
+<div class="form-group">
+    <div class="col-md-10">
+        <input type="button" value="Добавить поле" onclick="AddProperty()" class="btn btn-success" />
+    </div>
+</div>
+
+<script>
+    function AddProperty() {
+        var div = document.createElement('div');
+        div.className = "form-group";
+        let i = uuidv4();
+        div.id = i;
+        div.innerHTML = `
+    <div class="form-row">
+        <div class="col-md-5">
+            <label for="Key">Наименование поля</label>
+            @Html.TextBox("Key","",new { @class="form-control" })
+        </div>
+        <div class="col-md-5">
+            <label>Значение поля</label>
+            @Html.TextBox("Value","",new { @class="form-control" })
+        </div>
+    </div>
+<br>
+    <div class="col-md-1"><input type="button" value="Remove" onclick="RemoveProperty('`+ i +`')" class="btn btn-danger"/></div>
+
+            `;
+        formElements.appendChild(div);
+    }
+    function RemoveProperty(id) {
+        var obj = document.getElementById(id);
+        formElements.removeChild(obj);
+    }
+    function getGuid() {
+        let id = uuidv4();
+        return id;
+    }
+</script>
+

@@ -1,0 +1,24 @@
+﻿@model EventPlanning.Models.MyEventViewModel
+
+@{
+    ViewBag.Title = "Детали события";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <h4>Событие</h4>
+    <hr />
+
+    @Html.DisplayNameFor(model => model.MyEvent.Name):
+    @Html.DisplayFor(model => model.MyEvent.Name)
+    @Html.Partial("PropertyEventListSummaryView", Model.MyEventsProperties)
+</div>
+<div>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+    {
+        @Html.ActionLink("Изменить", "Edit", new { id = Model.MyEvent.Id }, new { @class = "btn btn-primary" })
+    }
+
+    @Html.ActionLink("Вернутся к списку", "Index", new { }, new { @class = "btn btn-primary" })
+</div>

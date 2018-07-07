@@ -1,0 +1,18 @@
+﻿@model List<EventPlanning.Models.MyEventProperty>
+<div id="formElements" style="height:100px;">
+    @foreach (var item in Model)
+    {
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col-md-5">
+                    <label>Наименование поля:</label>
+                    @item.Key
+                </div>
+                <div class="col-md-5">
+                    <label>Значение поля:</label>
+                    @item.Value
+                </div>
+            </div>
+        </div>
+    }
+</div>

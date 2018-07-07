@@ -1,0 +1,26 @@
+﻿@model EventPlanning.Models.MyEvent
+
+@{
+    ViewBag.Title = "Удаление события";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Удаление события</h2>
+
+<h3>Вы действительно хотите удалить это событие?</h3>
+<div>
+    <hr />
+    <div class="">
+        @Html.DisplayNameFor(model => model.Name):
+        @Html.DisplayFor(model => model.Name)
+    </div>
+    <br />
+    @using (Html.BeginForm("Delete","Events")) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        @Html.ActionLink("Вернутся к списку", "Index", new { }, new { @class = "btn btn-primary" })
+    </div>
+    }
+</div>

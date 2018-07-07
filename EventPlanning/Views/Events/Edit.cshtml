@@ -1,0 +1,53 @@
+﻿@model EventPlanning.Models.MyEventViewModel
+
+@{
+    ViewBag.Title = "Изменение события";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var normalDate = Html.Action("GetDateEvent", "Events",new { idEvent=Model.MyEvent.Id }).ToHtmlString();
+}
+
+<h2>Изменение события</h2>
+
+
+@using (Html.BeginForm("Edit","Events"))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.MyEvent.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MyEvent.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MyEvent.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MyEvent.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MyEvent.DateEvent, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input class="form-control text-box single-line valid" data-val="true" data-val-date="Поле Дата события должно содержать дату." data-val-required="Требуется поле Дата события." id="MyEvent_DateEvent" name="MyEvent.DateEvent" placeholder="Выберите дату мероприятия" type="datetime-local" value="@normalDate">
+            @Html.ValidationMessageFor(model => model.MyEvent.DateEvent, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @Html.Partial("PropertyEventListSummaryEdit", Model.MyEventsProperties)
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Сохранить" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Вернутся к списку", "Index",new { },new { @class="btn btn-primary" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,61 @@
+﻿@model EventPlanning.Models.MyEventViewModel
+
+@{
+    ViewBag.Title = "Создание события";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var eventProperty = new EventPlanning.Models.MyEventProperty();
+}
+
+<h2>Создание события</h2>
+
+
+@using (Html.BeginForm("Create","Events")) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MyEvent.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.MyEvent.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Введите название мероприятия" } })
+            @Html.ValidationMessageFor(model => model.MyEvent.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MyEvent.DateEvent, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.MyEvent.DateEvent, new { htmlAttributes = new { @class = "form-control", placeholder = "Выберите дату мероприятия", type = "datetime-local" } })
+            @Html.ValidationMessageFor(model => model.MyEvent.DateEvent, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MyEvent.MaxCountSubscribers, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model.MyEvent.MaxCountSubscribers, new { htmlAttributes = new { @class = "form-control", placeholder = "Введите максимальное количество участников" } })
+            @Html.ValidationMessageFor(model => model.MyEvent.MaxCountSubscribers, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Создать событие" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+
+    
+}
+
+<div>
+    @Html.ActionLink("Вернутся к списку", "Index", new { }, new { @class = "btn btn-primary" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
